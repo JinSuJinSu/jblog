@@ -37,6 +37,8 @@ public class BlogController {
 		Map<String, Object> map = blogService.getCategorys(userVo.getId());
 		List<CategoryVo> categoryList = (List<CategoryVo>)map.get("list");
 		List<PostVo> list = blogService.getPost(categoryList.get(0).getNo());
+		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		if(!list.isEmpty()) {
@@ -52,6 +54,8 @@ public class BlogController {
 		UserVo userVo = (UserVo)session.getAttribute("authUser");
 		Map<String, Object> map = blogService.getCategorys(userVo.getId());
 		List<PostVo> list = blogService.getPost(categoryNo);
+		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("categoryNo", categoryNo);
@@ -69,6 +73,8 @@ public class BlogController {
 		Map<String, Object> map = blogService.getCategorys(userVo.getId());
 		List<PostVo> list = blogService.getPost(categoryNo);
 		PostVo postVo = blogService.get(no);
+		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("postVo", postVo);
@@ -107,6 +113,8 @@ public class BlogController {
 		UserVo userVo = (UserVo)session.getAttribute("authUser");
 		Map<String, Object> map = blogService.getCategorys(userVo.getId());	
 		model.addAttribute("map", map);
+		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-admin-category";
 	}
 	
@@ -133,6 +141,8 @@ public class BlogController {
 	public String write(Model model, HttpSession session) {
 		UserVo userVo = (UserVo)session.getAttribute("authUser");
 		Map<String, Object> map = blogService.getCategorys(userVo.getId());
+		BlogVo blogVo = blogService.getBlog(userVo.getId());
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("map", map);
 		return "blog/blog-admin-write";
 	}
