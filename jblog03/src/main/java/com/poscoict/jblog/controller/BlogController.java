@@ -36,19 +36,21 @@ public class BlogController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	// 블로그 메인 화면
 	@RequestMapping({"/{id}"})
 	public String index(Model model, @PathVariable("id") String id) {	
-		Map<String, Object> map = blogService.getCategorys(id);
-		List<CategoryVo> categoryList = (List<CategoryVo>)map.get("list");
-		List<PostVo> list = blogService.getPost(categoryList.get(0).getNo());
+		Map<String, Object> map = blogService.getCategorys(id); // 카테고리 리스트, 카테고리 글 개수 리스트 받아오기
+		List<CategoryVo> categoryList = (List<CategoryVo>)map.get("list"); // 카테고리 리스트
+		List<PostVo> list = blogService.getPost(categoryList.get(0).getNo()); // 메인 화면으로 처음 들어갈 경우 제일 위에 있는 카테고리의 게시물을 가져온다.
 		BlogVo blogVo = blogService.getBlog(id);
-		servletContext.setAttribute("blogId", id);
-		servletContext.setAttribute("blogVo", blogVo);
+		servletContext.setAttribute("blogId", id); // 블로그 화면으로 들어갔을 때 블로그를 작성한 유저의 아이디를 서버에 저장시킨다.
+		servletContext.setAttribute("blogVo", blogVo); // 블로그 제목, 사진을 서버에 저장시킨다.
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("categoryNo", categoryList.get(0).getNo());
-		if(!list.isEmpty()) {
-			PostVo postVo = blogService.get(list.get(0).getNo());
+		
+		if(!list.isEmpty()) { // 카테고리 게시물이 없을 경우 로직을 수행하지 않는다.
+			PostVo postVo = blogService.get(list.get(0).getNo()); // 카테고리 게시물 중에서 맨 위에 있는 값을 가져온다.
 			model.addAttribute("postVo", postVo);
 		}
 		return "blog/blog-main";
@@ -56,13 +58,14 @@ public class BlogController {
 	
 	@RequestMapping({"/{id}/{categoryNo}"})
 	public String post(Model model, @PathVariable("id") String id, @PathVariable("categoryNo") int categoryNo) {
-		Map<String, Object> map = blogService.getCategorys(id);
-		List<PostVo> list = blogService.getPost(categoryNo);
+		Map<String, Object> map = blogService.getCategorys(id); // 카테고리 리스트 가져오기
+		List<PostVo> list = blogService.getPost(categoryNo); // 카테고리별 게시물 리스트 가져오기
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("categoryNo", categoryNo);
-		if(!list.isEmpty()) {
-			PostVo postVo = blogService.get(list.get(0).getNo());
+		
+		if(!list.isEmpty()) { // 카테고리 게시물이 없을 경우 로직을 수행하지 않는다.
+			PostVo postVo = blogService.get(list.get(0).getNo()); // 카테고리 게시물 중에서 맨 위에 있는 값을 가져온다.
 			model.addAttribute("postVo", postVo);
 		}
 		return "blog/blog-main";
@@ -70,9 +73,9 @@ public class BlogController {
 	
 	@RequestMapping({"/{id}/{categoryNo}/{no}"})
 	public String postDetail(Model model, @PathVariable("id") String id, @PathVariable("categoryNo") int categoryNo, @PathVariable("no") int no) {
-		Map<String, Object> map = blogService.getCategorys(id);
-		List<PostVo> list = blogService.getPost(categoryNo);
-		PostVo postVo = blogService.get(no);
+		Map<String, Object> map = blogService.getCategorys(id); // 카테고리 리스트 가져오기
+		List<PostVo> list = blogService.getPost(categoryNo); // 카테고리별 게시물 리스트 가져오기
+		PostVo postVo = blogService.get(no); // 게시물 제목을 클릭했을 때 이에 해당하는 내용을 보여준다.
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("postVo", postVo);
@@ -100,8 +103,8 @@ public class BlogController {
 		
 		String url = fileUploadService.restore(multipartFile);
 		if(url==null) {
-			BlogVo originVo = blogService.getBlog(authUser.getId());
-			url = originVo.getLogo();
+			BlogVo originVo = blogService.getBlog(authUser.getId()); // 사진을 바꾸지 않을 경우 기존에 있는 사진 url을 가져온다.
+			url = originVo.getLogo(); // url 값 바꾸기
 		}
 		blogVo.setLogo(url);
 		blogService.updateBlog(blogVo,authUser.getId());
