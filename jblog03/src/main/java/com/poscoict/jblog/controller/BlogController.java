@@ -3,7 +3,7 @@ package com.poscoict.jblog.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,17 +34,24 @@ public class BlogController {
 	private FileUploadService fileUploadService;
 	
 	@Autowired
-	private ServletContext servletContext;
+	private HttpSession session;
 	
 	// 블로그 메인 화면
 	@RequestMapping({"/{id}"})
-	public String index(Model model, @PathVariable("id") String id) {	
+	public String index(Model model, @PathVariable("id") String id) {
+		
+		// 블로그에 없는 유저로 접근할 때
+		List<String> userList = blogService.getUsers();
+		if(!userList.contains(id)) {
+			return "redirect:/";
+		}
+		
 		Map<String, Object> map = blogService.getCategorys(id); // 카테고리 리스트, 카테고리 글 개수 리스트 받아오기
 		List<CategoryVo> categoryList = (List<CategoryVo>)map.get("list"); // 카테고리 리스트
 		List<PostVo> list = blogService.getPost(categoryList.get(0).getNo()); // 메인 화면으로 처음 들어갈 경우 제일 위에 있는 카테고리의 게시물을 가져온다.
 		BlogVo blogVo = blogService.getBlog(id);
-		servletContext.setAttribute("blogId", id); // 블로그 화면으로 들어갔을 때 블로그를 작성한 유저의 아이디를 서버에 저장시킨다.
-		servletContext.setAttribute("blogVo", blogVo); // 블로그 제목, 사진을 서버에 저장시킨다.
+		session.setAttribute("blogId", id); // 블로그 화면으로 들어갔을 때 블로그를 작성한 유저의 아이디를 서버에 저장시킨다.
+		session.setAttribute("blogVo", blogVo); // 블로그 제목, 사진을 서버에 저장시킨다.
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 		model.addAttribute("categoryNo", categoryList.get(0).getNo());
@@ -86,7 +93,7 @@ public class BlogController {
 	@Auth
 	@RequestMapping(value="/basic", method=RequestMethod.GET)
 	public String basic(@AuthUser UserVo authUser) {
-		String blogId = (String)servletContext.getAttribute("blogId");
+		String blogId = (String)session.getAttribute("blogId");
 		if(!authUser.getId().equals(blogId)) {
 			return "redirect:/blog/" + blogId; // html 화면에 글자가 없어도 url로 접속할 수도 있으므로 이를 방지한다.
 		}	
@@ -111,12 +118,11 @@ public class BlogController {
 		return "redirect:/blog/" + authUser.getId();
 	}
 	
-	
 	// 유저의 카테고리 목록 조회
 	@Auth
 	@RequestMapping(value="/category", method=RequestMethod.GET)
 	public String category(Model model, @AuthUser UserVo authUser) {
-		String blogId = (String)servletContext.getAttribute("blogId");
+		String blogId = (String)session.getAttribute("blogId");
 		if(!authUser.getId().equals(blogId)) {
 			return "redirect:/blog/" + blogId; // html 화면에 글자가 없어도 url로 접속할 수도 있으므로 이를 방지한다.
 		}	
@@ -146,12 +152,11 @@ public class BlogController {
 		return "redirect:/blog/" + authUser.getId();
 	}
 	
-	
 	// 글 작성 화면으로 이동 후 조회
 	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String write(Model model, @AuthUser UserVo authUser) {
-		String blogId = (String)servletContext.getAttribute("blogId");
+		String blogId = (String)session.getAttribute("blogId");
 		if(!authUser.getId().equals(blogId)) {
 			return "redirect:/blog/" + blogId; // html 화면에 글자가 없어도 url로 접속할 수도 있으므로 이를 방지한다.
 		}	

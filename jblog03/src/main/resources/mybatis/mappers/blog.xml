@@ -3,6 +3,13 @@
 <mapper namespace="blog">
 
 
+	<!-- 블로그 유저 정보 조회 -->
+	<select id="findUsers" resultType="String">
+	<![CDATA[
+			select id from user
+	]]>
+	</select>
+
 	 <!-- 메인게시판 카테고리별 제목 조회 -->
 	<select id="findPost" parameterType="int" resultType="postVo">
 	<![CDATA[
