@@ -15,24 +15,28 @@ public class UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 유저 데이터 추가
 	public boolean insert(UserVo vo) {
 		// TODO Auto-generated method stub
 		int count = sqlSession.insert("user.insert",vo);
 		return count==1;
 	}
 	
+	// 블로그 데이터 추가
 	public boolean insertBlog(UserVo vo) {
 		// TODO Auto-generated method stub
 		int count = sqlSession.insert("user.insertBlog",vo);
 		return count==1;
 	}
 	
+	// 카테고리 데이터 추가
 	public boolean insertCategory(UserVo vo) {
 		// TODO Auto-generated method stub
 		int count = sqlSession.insert("user.insertCategory",vo);
 		return count==1;
 	}
 		
+	// 유저 정보 찾기
 	public UserVo findUser(String id, String password){
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);

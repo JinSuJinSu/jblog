@@ -27,7 +27,7 @@ public class UserController {
 	public String join(UserVo userVo) {
 		System.out.println(userVo);
 		if(userVo.getId()==null || userVo.getId().equals("") || userVo.getName()==null || userVo.getName().equals("") || 
-				userVo.getPassword()==null || userVo.getPassword().equals("")) {
+				userVo.getPassword()==null || userVo.getPassword().equals("")) { 
 			return "redirect:/user/join";
 		}
 		userService.join(userVo);
