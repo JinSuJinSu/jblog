@@ -17,8 +17,13 @@ public class BlogRepository {
 	
 	@Autowired
 	private SqlSession sqlSession;
-
 	
+	// 블로그 이용 유저 얻기
+	public List<String> findUsers(){
+		List<String> list = sqlSession.selectList("blog.findUsers");
+		return list;
+	}
+
 	// 메인게시판 카테고리별 제목 조회
 	public List<PostVo> findPost(int categoryNo){
 		List<PostVo> list =  sqlSession.selectList("blog.findPost", categoryNo);

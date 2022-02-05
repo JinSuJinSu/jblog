@@ -19,6 +19,12 @@ public class BlogService {
 	@Autowired
 	private BlogRepository blogRepository;
 	
+	// 블로그 이용 유저 얻기
+	public List<String> getUsers(){
+		List<String> list = blogRepository.findUsers();
+		return list;
+	}
+	
 	// 메인게시판 카테고리별 게시글 제목 얻기
 	public List<PostVo> getPost(int categoryNo){
 		List<PostVo> list = blogRepository.findPost(categoryNo);
