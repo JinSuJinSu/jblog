@@ -22,15 +22,5 @@ public class UserService {
 	public UserVo getUser(String id, String password) {
 		return userRepository.findUser(id, password);
 	}
-//	
-//	public UserVo getUser(Long userNo) {
-//		return userRepository.findByNo(userNo);
-//	}	
-//	
-//	public boolean updateUser(UserVo userVo) {
-//		return userRepository.update(userVo);
-//		
-//	}
 	
-
 }
