@@ -45,6 +45,9 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		if (parameter.getParameterType().equals(UserVo.class) == false) {
 			return false;
 		}
+		
+		
+		
 
 		return true;
 	}
