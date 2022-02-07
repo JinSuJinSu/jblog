@@ -34,6 +34,10 @@
 			<bean class="com.poscoict.jblog.security.LogoutIntercepter"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
+			<mvc:mapping path="/blog/**"/>
+			<bean class="com.poscoict.jblog.interceptor.BlogIntercepter"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/user/auth"/>
 			<mvc:exclude-mapping path="/user/logout"/>
@@ -66,7 +70,7 @@
 
 
 	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/assets/images/**" location="file:/upload-images/" />			
+	<mvc:resources mapping="/images/**" location="file:/upload-images/" />			
 	<context:annotation-config />
 	<context:component-scan base-package="com.poscoict.jblog.controller" />
 

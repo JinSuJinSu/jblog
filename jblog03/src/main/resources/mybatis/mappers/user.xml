@@ -16,7 +16,7 @@
 
 	<insert id="insertBlog" parameterType="uservo">
 		<![CDATA[
-		insert into blog values('${id}님의 블로그'  ,'/assets/images/202224210820.jpg', #{id})
+		insert into blog values('${id}님의 블로그'  ,'/images/202224210820.jpg', #{id})
 		]]>
 	</insert>
 	
