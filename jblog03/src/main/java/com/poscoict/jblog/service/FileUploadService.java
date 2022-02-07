@@ -1,4 +1,4 @@
-package com.poscoict.jblog.repository;
+package com.poscoict.jblog.service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadService {
 	
 	private static String SAVE_PATH = "/upload-images";
-	private static String URL_BASE = "/images";
+	private static String URL_BASE = "/assets/images";
 	
 	public String restore(MultipartFile multipartFile){
 		String url=null;

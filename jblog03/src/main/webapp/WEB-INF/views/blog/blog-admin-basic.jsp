@@ -20,7 +20,7 @@
 					</c:when>
 					<c:otherwise>	
 						<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}">메인화면</a></li>
+						<li><a href="${pageContext.request.contextPath}/${authUser.id}">메인화면</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -29,10 +29,10 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="${pageContext.request.contextPath}/blog/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
-				<form action="${pageContext.request.contextPath}/blog/update" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/${authUser.id}/update" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
