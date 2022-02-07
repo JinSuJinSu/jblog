@@ -28,9 +28,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/blog/basic">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/basic">블로그 관리</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath}/blog/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 		      		<table class="admin-cat">
 		      		<tr>
@@ -48,7 +48,7 @@
 				      		<td>${vo.descrpition}</td>
 				      		<td>
 					      		<c:if test = "${map.cntList.get(status.index)==0}">
-	      							<a href="${pageContext.servletContext.contextPath}/blog/delete/${vo.no}">
+	      							<a href="${pageContext.servletContext.contextPath}/${authUser.id}/delete/${vo.no}">
 	      							<img src="${pageContext.servletContext.contextPath}/assets/images/delete.jpg"></a>
 					      		</c:if>
 				      		</td>
@@ -57,7 +57,7 @@
 	      		</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath}/blog/add" method="post">
+      			<form action="${pageContext.request.contextPath}/${authUser.id}/add" method="post">
 		      	<table id="admin-cat-add">
 		      		<tr>
 		      			<td class="t">카테고리명</td>
