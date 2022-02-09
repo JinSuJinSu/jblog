@@ -23,20 +23,20 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join() {
+	public String join(@ModelAttribute UserVo userVo) {
 		return "user/join";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(UserVo userVo) {
-		System.out.println(userVo);
-		if(userVo.getId()==null || userVo.getId().equals("") || userVo.getName()==null || userVo.getName().equals("") || 
-				userVo.getPassword()==null || userVo.getPassword().equals("")) { 
-			return "redirect:/user/join";
+	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAllAttributes(result.getModel());
+			return "user/join";
 		}
 		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
+	
 	@RequestMapping(value="/joinsuccess", method=RequestMethod.GET)
 	public String joinsuccess() {
 		return "user/joinsuccess";

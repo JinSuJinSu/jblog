@@ -11,20 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>${blogVo.title}</h1>
-			<ul>
-				<c:choose>
-					<c:when test="${empty authUser}">
-						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
-					</c:when>
-					<c:otherwise>	
-						<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}">메인화면</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog_header.jsp"/>
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
@@ -75,11 +62,7 @@
 		      	</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>${blogVo.title}</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog_footer.jsp"/>
 	</div>
 </body>
 </html>
