@@ -24,6 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String password = request.getParameter("password");		
 		UserVo authUser = userService.getUser(id,password);
 		if(authUser==null) {
+			request.setAttribute("result", "fail");
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 			return false;
 		}
