@@ -53,7 +53,8 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>jblog03</module>
 		<module>jblog04</module>
+		<module>jblog05</module>
+		<module>jblog03</module>
 	</modules>
 </project>
