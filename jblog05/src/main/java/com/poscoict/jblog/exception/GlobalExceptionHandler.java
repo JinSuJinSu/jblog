@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
 		LOGGER.error(errors.toString());
-
+	
 		//2. 사과페이지(HTML 응답, 정상 종료)
 		model.addAttribute("exception", errors.toString());
 		return "error/exception";
