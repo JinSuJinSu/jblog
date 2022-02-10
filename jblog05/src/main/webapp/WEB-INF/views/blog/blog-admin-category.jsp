@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jblog.css">
 </head>
 <body>
 	<div id="container">
@@ -36,7 +36,7 @@
 				      		<td>
 					      		<c:if test = "${map.cntList.get(status.index)==0}">
 	      							<a href="${pageContext.servletContext.contextPath}/blog/${authUser.id}/delete/${vo.no}">
-	      							<img src="${pageContext.servletContext.contextPath}/assets/images/delete.jpg"></a>
+	      							<img src="${pageContext.request.contextPath}/resources/images/delete.jpg"></a>
 					      		</c:if>
 				      		</td>
 			      		</tr>

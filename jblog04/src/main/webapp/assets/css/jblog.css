@@ -40,8 +40,8 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 
 .welcome-message								{ height: 200px }
 .welcome-message span							{ font-size:1.2em; font-wight:bold; color:#777 }
-.welcome-message span:before					{ content: url(/jblog03/assets/images/bul1.gif);}
-.welcome-message span:after						{ content: url(/jblog03/assets/images/bul2.gif);}		
+.welcome-message span:before					{ content: url(/jblog04/assets/images/bul1.gif);}
+.welcome-message span:after						{ content: url(/jblog04/assets/images/bul2.gif);}		
 
 
 
