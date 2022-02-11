@@ -79,10 +79,5 @@ public class WebConfig implements WebMvcConfigurer {
         .addResourceLocations(env.getProperty("css.resourceLocations"));
 	}
 	
-	
-		
-		
-	
-	
 
 }
