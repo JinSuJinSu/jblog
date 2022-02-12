@@ -1,4 +1,4 @@
-package com.poscoict.mysite.initializer;
+package com.poscoict.jblog.initializer;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletRegistration.Dynamic;
