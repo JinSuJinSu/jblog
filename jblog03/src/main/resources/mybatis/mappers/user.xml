@@ -8,6 +8,12 @@
 		]]>
 	</select>
 	
+	<select id="findUserWithId" parameterType="String" resultType="uservo">
+		<![CDATA[
+		select id from user where id=#{id}
+		]]>
+	</select>
+	
 	<insert id="insert" parameterType="uservo">
 		<![CDATA[
 		insert into user values(#{id}, #{name}, #{password})

@@ -15,6 +15,7 @@
 		<c:otherwise>
 			<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 			<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}">내블로그</a></li>
+			<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/ajax">내블로그(ajax)</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>

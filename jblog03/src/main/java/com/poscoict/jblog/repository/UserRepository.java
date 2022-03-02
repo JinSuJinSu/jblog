@@ -35,6 +35,12 @@ public class UserRepository {
 		int count = sqlSession.insert("user.insertCategory",vo);
 		return count==1;
 	}
+	
+	// 유저 정보 찾기(아이디 중복 체크)
+	public UserVo findUserWithId(String id) {
+		UserVo userVo = sqlSession.selectOne("user.findUserWithId",id);
+		return userVo;
+	}
 		
 	// 유저 정보 찾기
 	public UserVo findUser(String id, String password){
@@ -44,16 +50,6 @@ public class UserRepository {
 		UserVo vo = sqlSession.selectOne("user.findUser",map);
 		return vo;
 	}
-//		
-//	public boolean update(UserVo vo) {
-//		int count = sqlSession.update("user.update", vo);
-//		return count==1;
-//	}
-//		
-//	
-//	public UserVo findByNo(Long userNo) {
-//		UserVo result = sqlSession.selectOne("user.findByNo", userNo);
-//		return result;
-//	}
+
 
 }

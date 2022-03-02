@@ -36,7 +36,7 @@ public class BlogController {
 	@Autowired
 	private FileUploadService fileUploadService;
 
-	// 블로그 메인 화면
+	// 블로그 메인 화면 
 	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
 //	@RequestMapping({""})
 	public String index(Model model, @PathVariable("id") String id, @PathVariable("pathNo1") Optional<Integer> pathNo1,
@@ -74,6 +74,11 @@ public class BlogController {
 		model.addAttribute("categoryNo", categoryNo); // 카테고리 번호
 		model.addAttribute("postVo", postVo); // 특정 게시물
 		return "blog/blog-main";
+	}
+	
+	@RequestMapping({"/ajax"})
+	public String spa(Model model) {
+		return "blog/blog-main-ajax";
 	}
 
 	// 기본 설정 화면으로 이동

@@ -15,6 +15,4 @@ import com.poscoict.config.app.MyBatisConfig;
 public class AppConfig {
 	
 
-	
-
 }
