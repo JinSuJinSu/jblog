@@ -18,8 +18,7 @@ let renderCategory = function(vo) {
 			"<li>" +
 			"<a href=" + "${pageContext.request.contextPath}/api/blog/${blogId}?categoryNo=" + vo.no + 
 			" category-no=" + vo.no + ">" + vo.name + "</a>" + 
-			"</li>";
-			
+			"</li>";			
 	 return html;		
 }
 
@@ -29,8 +28,7 @@ let renderPost = function(vo){
 		"<a href=" + "${pageContext.request.contextPath}/api/blog/${blogId}/" + vo.no + 
 		" post-no=" + vo.no + ">" + vo.title + "</a>" + 
 		"<span>" + vo.regDate + "</span>"
-		"</li>";
-		
+		"</li>";		
  	return html;	
 }
 
@@ -41,8 +39,7 @@ let renderPostVo = function(vo){
  	return html;	
 }
 
-let categoryList = function(){
-	
+let categoryList = function(){	
 	$.ajax({
 		url: '${pageContext.request.contextPath}/api/blog/${blogId}/category',
 		type: 'get',
@@ -53,49 +50,63 @@ let categoryList = function(){
 				return;
 			}
 			response.data.forEach(element=>{
-				$("#navigation ul").append(renderCategory(element));
+				if(response.data.indexOf(element)===0){
+					$(".blog-content").append(renderPostVo(element));
+				}
+				else{
+					if(element.title){
+						$(".blog-list").append(renderPost(element));
+					}
+					else{
+						$("#navigation ul").append(renderCategory(element));
+					}
+				}				
 			});
 		}
 	});
-}
+};
 
 let PostList = function(categoryNo){
 	$.ajax({
-		url: "${pageContext.request.contextPath}/api/blog/${blogId}?categoryNo=" + categoryNo,
+		url: "${pageContext.request.contextPath}/api/blog/${blogId}/post?categoryNo=" + categoryNo,
 		type: 'get',
 		dataType: 'json',
 		success: function(response) {
-			console.log(response)
 			if(response.result !== 'success') {
 				console.error(response.message);
 				return;
 			}
 			 $(".blog-list li").remove();
 			response.data.forEach(element=>{
-				$(".blog-list").append(renderPost(element));
+				if(response.data.indexOf(element)===0){
+					$(".blog-content h4").remove();
+					$(".blog-content p").remove();
+					$(".blog-content").append(renderPostVo(element));
+				}
+				else{
+					$(".blog-list").append(renderPost(element));
+				}				
 			});
 		}
 	});
-}
+};
 
 let postVo = function(postNo){
 	$.ajax({
-		url: "${pageContext.request.contextPath}/api/blog/${blogId}?categoryNo=" + categoryNo,
+		url: "${pageContext.request.contextPath}/api/blog/${blogId}/postVo?postNo=" + postNo,
 		type: 'get',
 		dataType: 'json',
 		success: function(response) {
-			console.log(response)
 			if(response.result !== 'success') {
 				console.error(response.message);
 				return;
 			}
-			 $(".blog-list li").remove();
-			response.data.forEach(element=>{
-				$(".blog-list").append(renderPost(element));
-			});
+			 $(".blog-content h4").remove();
+			 $(".blog-content p").remove();
+			 $(".blog-content").append(renderPostVo(response.data));	 		
 		}
 	});
-}
+};
 
 $(function(){
 	categoryList();
@@ -105,6 +116,13 @@ $(function(){
 		event.preventDefault();
 		let categoryNo = $(this).attr("category-no");
 		PostList(categoryNo);
+	});
+	
+	// 포스트 이벤트 처리
+	$(document).on('click', ".blog-list li a", function(event) {
+		event.preventDefault();
+		let postNo = $(this).attr("post-no");
+		postVo(postNo);
 	});
 
 });

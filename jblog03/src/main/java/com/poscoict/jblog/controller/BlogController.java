@@ -80,14 +80,17 @@ public class BlogController {
 	public String spa(Model model) {
 		return "blog/blog-main-ajax";
 	}
+	
+	@Auth
+	@RequestMapping({"/admin/category/ajax"})
+	public String categorySpa(Model model) {
+		return "blog/blog-admin-category-ajax";
+	}
 
 	// 기본 설정 화면으로 이동
 	@Auth
 	@RequestMapping(value = "/admin/basic", method = RequestMethod.GET)
 	public String basic(@AuthUser UserVo authUser, @PathVariable("id") String id) {
-//		if (!authUser.getId().equals(id)) {
-//			return "redirect:/" + id; // html 화면에 글자가 없어도 url로 접속할 수도 있으므로 이를 방지한다.
-//		}
 		return "blog/blog-admin-basic";
 	}
 

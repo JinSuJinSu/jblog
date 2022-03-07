@@ -17,6 +17,7 @@
 				<ul class="admin-menu">
 					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/basic">기본설정</a></li>
 					<li class="selected">카테고리</li>
+					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/category/ajax">카테고리(ajax)</a></li>
 					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 		      		<table class="admin-cat">
