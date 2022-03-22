@@ -131,7 +131,7 @@
 				<version>1.1</version>
 				<configuration>
 					<url>http://127.0.0.1:8080/manager/text</url>
-					<path>/jblog06</path>
+					<path>/jblog07</path>
 					<username>admin</username>
 					<password>manager</password>
 				</configuration>
